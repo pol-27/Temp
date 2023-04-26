@@ -1,76 +1,70 @@
 <!DOCTYPE html>
-<html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <style>
-            #slide {
-                width: 150px;
-                height: 100px;
-                border: 1px solid yellow;
-                overflow: hidden;
-                position: relative;
-            }
-            .total-slide {
-                display: flex;
-                width: 450px;
-                position: absolute;
-                left: 0px;
-                transition: 1s ease;
-            }
-            .total-slide > div {
-                width: 150px;
-                height: 100px;
-                text-align: center;
-                line-height: 100px;
-                font-size: 25px;
-                font-weight: bold;
-            }
-            .total-slide > div:nth-child(1) {
-                background: red;
-            }
-            .total-slide > div:nth-child(2) {
-                background: green;
-            }
-            .total-slide > div:nth-child(3) {
-                background: blue;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="slide">
-            <div class="total-slide">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-            </div>
-        </div>
-        <dvi id="time"></dvi>
-        <script>
-            let totalSlide = document.querySelector(".total-slide");
-            // 지정한 시간동안 대기하다가 한 번만 실행함.
-            // setTimeout(() => {
-            //     totalSlide.style.left = "-150px";
-            // }, 1000);
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            opacity: 0; - 투명, 요소가 있음
+            visibility: hidden; - 숨김, 요소가 있음
 
-            // setInterval : 계속 반복이 가능해짐.
-            let flag = 0;
-            const interVal = setInterval(() => {
-                flag++;
-                if (flag === 1) {
-                    totalSlide.style.left = "-150px";
-                } else if (flag === 2) {
-                    totalSlide.style.left = "-300px";
-                } else if (flag === 3) {
-                    totalSlide.style.left = "-150px";
-                } else if (flag === 4) {
-                    totalSlide.style.left = "0px";
+            opacity + visibility = display:none;
+        */
+        #modal {
+            display: none; /*요소 자체가 없음*/
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            background: red;
+            text-align: center;
+            line-height: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #btn {
+            background-color: lightgoldenrodyellow;
+            padding: 5px;
+            cursor: pointer;
+            width: 150px;
+        }
+        .ani {
+            animation-name: showModal;
+            animation-duration: 0.6s;
+        }
+        @keyframes showModal {
+            0% {transform: translate(-50%, -50%) scale(0);}
+            100% {transform: translate(-50%, -50%) scale(1);}
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let modal = document.querySelector("#modal");
+            let btn = document.querySelector("#btn");
+
+            let flag = true;
+
+            btn.onclick = function() {
+                if(flag) {
+                    modal.style.display = 'block';
+                    this.innerText = 'Close';
                 } else {
-                    flag = 0;
+                    modal.style.display = 'none';
+                    this.innerText = 'Login';
                 }
-            }, 1000);
-        </script>
-    </body>
+
+                flag = !flag; //토글
+            };
+
+            //이벤트 위임 : 부모에 이벤트를 걸고 해당 자식을 찾기
+            
+        };
+    </script>
+</head>
+<body>
+    <div id="modal" class="ani">Show</div>
+    <div id="btn">Login</div>
+</body>
 </html>

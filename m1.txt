@@ -1,6 +1,9 @@
-test
+git 단축 상태 표시
+git status [-s, --short]
 
-new
+??	  : Untracted
+A	    : 새로 생성한 파일 staged 상태로 추가한 파일
 
-
-3 ss
+   M	: 내용을 변경했지만 아직 staged상태로 추가하지 않은 상태
+M	    : 파일을 변경하고 staged 상태로 추가한 상태
+MM	  : staged 상태로 추가한 후 다시 내용을 변경한 상태
