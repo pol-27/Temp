@@ -5,66 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /*
-            opacity: 0; - 투명, 요소가 있음
-            visibility: hidden; - 숨김, 요소가 있음
-
-            opacity + visibility = display:none;
-        */
-        #modal {
-            display: none; /*요소 자체가 없음*/
-            position: fixed;
-            width: 250px;
-            height: 250px;
-            background: red;
-            text-align: center;
-            line-height: 250px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        #btn {
-            background-color: lightgoldenrodyellow;
-            padding: 5px;
-            cursor: pointer;
-            width: 150px;
-        }
-        .ani {
-            animation-name: showModal;
-            animation-duration: 0.6s;
-        }
-        @keyframes showModal {
-            0% {transform: translate(-50%, -50%) scale(0);}
-            100% {transform: translate(-50%, -50%) scale(1);}
-        }
-    </style>
-    <script>
-        window.onload = function() {
-            let modal = document.querySelector("#modal");
-            let btn = document.querySelector("#btn");
-
-            let flag = true;
-
-            btn.onclick = function() {
-                if(flag) {
-                    modal.style.display = 'block';
-                    this.innerText = 'Close';
-                } else {
-                    modal.style.display = 'none';
-                    this.innerText = 'Login';
-                }
-
-                flag = !flag; //토글
-            };
-
-            //이벤트 위임 : 부모에 이벤트를 걸고 해당 자식을 찾기
-            
-        };
-    </script>
 </head>
 <body>
-    <div id="modal" class="ani">Show</div>
-    <div id="btn">Login</div>
+    <script>
+        let person = {
+            name: "홍길동",
+            age: 28,
+            say() {
+                console.log(this.name);
+            }
+        };
+
+        function Person(name, age) {
+            let isAdmin = true; //지역 변수
+            let word = function() { //지역 함수
+                console.log('word');
+            };
+            this.name = name; //속성
+            this.age = age;
+            this.say = function() { //메서드
+                console.log(this.name);
+                word();
+            };
+        }
+
+        let go = new Person("고길동", 28);
+        go.say();
+        let kim = new Person("김길동", 28);
+        let che = new Person("채길동", 28);
+    </script>
 </body>
 </html>
